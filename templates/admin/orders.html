@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Manage Orders{% endblock %}
+
+{% block admin_content %}
+<h1 class="mb-4">Manage Orders</h1>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                <th>Date</th>
+                <th>Items</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.user.username }}</td>
+                <td>{{ order.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>
+                    <ul class="list-unstyled mb-0">
+                        {% for item in order.items %}
+                        <li>{{ item.quantity }}x {{ item.product.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    ${{ "%.2f"|format(order.items|sum(attribute='product.price') * order.items|sum(attribute='quantity')) }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %} 

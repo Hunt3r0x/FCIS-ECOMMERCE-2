@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {% if product.image_url %}
+        <img src="{{ product.image_url }}" class="img-fluid rounded" alt="{{ product.name }}">
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <h1>{{ product.name }}</h1>
+        <p class="lead">{{ product.description }}</p>
+        <p class="h3 text-primary">${{ "%.2f"|format(product.price) }}</p>
+        <p>Stock: {{ product.stock }}</p>
+        <p>Category: {{ product.category.name }}</p>
+        <div class="d-grid gap-2">
+            <a href="{{ url_for('add_to_cart', pid=product.id) }}" class="btn btn-success btn-lg">Add to Cart</a>
+            <a href="{{ url_for('category_view', cid=product.category.id) }}" class="btn btn-outline-primary">Back to Category</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Products</h1>
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            {% if product.image_url %}
+            <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text"><strong>Price: ${{ "%.2f"|format(product.price) }}</strong></p>
+                <p class="card-text">Stock: {{ product.stock }}</p>
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('product_view', pid=product.id) }}" class="btn btn-primary">View Details</a>
+                    <a href="{{ url_for('add_to_cart', pid=product.id) }}" class="btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

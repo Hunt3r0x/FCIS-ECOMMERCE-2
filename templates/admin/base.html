@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="list-group">
+            <a href="{{ url_for('admin_index') }}" class="list-group-item list-group-item-action">Dashboard</a>
+            <a href="{{ url_for('admin_products') }}" class="list-group-item list-group-item-action">Products</a>
+            <a href="{{ url_for('admin_orders') }}" class="list-group-item list-group-item-action">Orders</a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        {% block admin_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %} 

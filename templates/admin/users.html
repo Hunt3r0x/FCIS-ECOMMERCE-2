@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Users{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title mb-4">Users</h5>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th class="text-end">Admin</th>
+                        <th class="text-end">Last Order</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td class="text-end">
+                            {% if user.is_admin %}
+                            <span class="text-muted">Yes</span>
+                            {% else %}
+                            <span class="text-muted">No</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end">
+                            {% if user.last_order_date %}
+                            <span class="text-muted">{{ user.last_order_date.strftime('%Y-%m-%d') }}</span>
+                            {% else %}
+                            <span class="text-muted">Never</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end">
+                            <a href="{{ url_for('admin_delete_user', user_id=user.id) }}" class="btn btn-sm btn-outline-dark" onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block admin_content %}
+<h1 class="mb-4">Admin Dashboard</h1>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Products</h5>
+                <p class="card-text display-4">{{ products|length }}</p>
+                <a href="{{ url_for('admin_products') }}" class="btn btn-primary">Manage Products</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Orders</h5>
+                <p class="card-text display-4">{{ orders|length }}</p>
+                <a href="{{ url_for('admin_orders') }}" class="btn btn-primary">View Orders</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Users</h5>
+                <p class="card-text display-4">{{ users|length }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in products %}
+    <div class="col">
+        <div class="card h-100">
+            <img src="https://createx.bg/wp-content/uploads/2023/06/how-to-create-an-online-shop-createx_blog_june_01-1024x600.jpg" 
+                 class="card-img-top" 
+                 alt="{{ product.name }}"
+                 style="height: 200px; object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title mb-2">{{ product.name }}</h5>
+                <p class="card-text text-muted mb-3">${{ "%.2f"|format(product.price) }}</p>
+                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-dark w-100">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 
